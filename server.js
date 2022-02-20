@@ -53,6 +53,10 @@ function init() {
                 "View All Departments",
                 "Update Employee",
                 "Delete Employee",
+                "Delete Role",
+                "Delete Department",
+                "View Employee by department",
+                
                 "Exit"
             ]
         })
@@ -81,14 +85,27 @@ function init() {
                 case "View All Departments":
                     viewDepartments();
                     break;
+                
+                case "View Employees by Departments":
+                    viewEmployesbyDepartments();
+                    break;
+
 
                 case "Update Employee":
                     updateEmployee();
                     break;
 
                 case "Delete Employee":
-                        deleteEmployee();
+                    deleteEmployee();
                     break;
+
+                case "Delete Role":
+                    deleteRole();
+                    break;
+                
+                case "Delete Department":
+                      deleteDepartment();
+                     break;
 
                 case "Exit":
                     connection.end();
@@ -293,7 +310,8 @@ function updateEmployee() {
               );
             })
         }
-        function deleteDepartment() {
+
+function deleteDepartment() {
             inquirer.prompt(
                 {
                     name: "deleteDepto",
@@ -302,7 +320,7 @@ function updateEmployee() {
                 }
     
             ).then (function (choose){
-            connection.query("DELETE FROM department WHERE ?",
+            connection.query("DELETE FROM departments WHERE ?",
                 {
                   id: choose.deleteDepto
                 },
@@ -313,3 +331,13 @@ function updateEmployee() {
               );
             })
         }       
+
+function viewEmployesbyDepartments(){
+    connection.query("SELECT id  FROM departments", function (err, results) {
+        if (err) throw err;
+        console.table(results);
+        init();
+    });
+
+}            
+                   
