@@ -51,6 +51,8 @@ function init() {
                 "View All Roles",
                 "Add Department",
                 "View All Departments",
+                "Update Employee",
+                "Delete Employee",
                 "Exit"
             ]
         })
@@ -78,6 +80,14 @@ function init() {
 
                 case "View All Departments":
                     viewDepartments();
+                    break;
+
+                case "Update Employee":
+                    updateEmployee();
+                    break;
+
+                case "Delete Employee":
+                        deleteEmployee();
                     break;
 
                 case "Exit":
@@ -211,3 +221,95 @@ function viewDepartments() {
         init();
     });
 }               
+
+function updateEmployee() {
+    inquirer.prompt([{
+                name: "updateEmployee",
+                type: "input",
+                message: "Which employee do you want to update?",
+            },
+            {
+                name: "roleID",
+                type: "number",
+                message: "What is the new role ID?",
+            }
+
+        ]).then(function (choose) {
+                connection.query("UPDATE employees SET ? WHERE ?",
+                    [{
+                            role_Id: choose.roleID
+                        },
+                        {
+                            id: choose.updateEmployee
+                        }
+                    ],
+                    function (err, res) {
+                        if (err) throw err;
+                        init();
+                    }
+
+                )
+            })
+        }
+
+        function deleteEmployee() {
+            inquirer.prompt(
+                {
+                    name: "deleteEmployee",
+                    type: "number",
+                    message: "What is the employee's ID number?",
+                }
+    
+            ).then (function (choose){
+            connection.query("DELETE FROM employees WHERE ?",
+                {
+                  id: choose.deleteEmployee
+                },
+                function(err, res) {
+                  if (err) throw err;
+                  init();
+                }
+              );
+            })
+        }
+
+        function deleteRole() {
+            inquirer.prompt(
+                {
+                    name: "deleteRole",
+                    type: "number",
+                    message: "What is the role ID number?",
+                }
+    
+            ).then (function (choose){
+            connection.query("DELETE FROM roles WHERE ?",
+                {
+                  id: choose.deleteRole
+                },
+                function(err, res) {
+                  if (err) throw err;
+                  init();
+                }
+              );
+            })
+        }
+        function deleteDepartment() {
+            inquirer.prompt(
+                {
+                    name: "deleteDepto",
+                    type: "number",
+                    message: "What is the department ID number?",
+                }
+    
+            ).then (function (choose){
+            connection.query("DELETE FROM department WHERE ?",
+                {
+                  id: choose.deleteDepto
+                },
+                function(err, res) {
+                  if (err) throw err;
+                 init();
+                }
+              );
+            })
+        }       
