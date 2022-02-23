@@ -1,5 +1,5 @@
 {
-  "name": "employeetracker",
+  "name": "employeemanagementsystem",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kdher/EmployeeTracker.git"
+    "url": "git+https://github.com/kdher/EmployeeManagementSystem.git"
   },
   "author": "Eder Ramirez",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kdher/EmployeeTracker/issues"
+    "url": "https://github.com/kdher/EmployeeManagementSystem/issues"
   },
-  "homepage": "https://github.com/kdher/EmployeeTracker#readme",
+  "homepage": "https://github.com/kdher/EmployeeManagementSystem#readme",
   "dependencies": {
     "inquirer": "^8.2.0",
     "mysql2": "^2.3.3"
